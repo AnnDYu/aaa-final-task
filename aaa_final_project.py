@@ -1,8 +1,8 @@
 from random import randint
 from typing import Callable
+import click
 
-
-class Pizza:
+class our_pizza:
     def __init__(self, name: str, size: str):
         if name not in ['Margherita', 'Pepperoni', 'Hawaiian']:
             raise ValueError('This pizza in not in menu!')
@@ -45,7 +45,7 @@ def order(pizza: str, size: str, delivery_flag: bool):
     """Команда готовит пиццу, флаг –—delivery передает ее с курьером."""
     if delivery_flag not in [True, False]:
         raise ValueError('Delivery included, true or false')
-    ordered_pizza = Pizza(pizza, size)
+    ordered_pizza = our_pizza(pizza, size)
     print(ordered_pizza)
     if delivery_flag == True:
         return ordered_pizza.__str__() + bake(pizza).__str__() + delivery(pizza).__str__()
@@ -55,7 +55,7 @@ def order(pizza: str, size: str, delivery_flag: bool):
 
 def menu():
     """Команда отображает доступное меню"""
-    all_pizza = [Pizza('Margherita', 'L'), Pizza('Pepperoni', 'L'), Pizza('Hawaiian', 'L')]
+    all_pizza = [our_pizza('Margherita', 'L'), our_pizza('Pepperoni', 'L'), our_pizza('Hawaiian', 'L')]
     answer = ''
     for pizza in all_pizza:
         answer += f'- {pizza.name}: ' + ', '.join(ingredient for ingredient in pizza.ingredients) + '\n'
@@ -75,24 +75,24 @@ def log(example: str):
 
 """шаблоны, в которые подставляется время"""
 
-@log('🥧 Приготовили за {} с!')
-def bake(pizza: Pizza):
+@log('👨‍🍳 Приготовили за {} с!')
+def bake(pizza: our_pizza):
     """Готовит пиццу"""
 
 
 @log('🛵 Доставили за {} с!')
-def delivery(pizza: Pizza):
+def delivery(pizza: our_pizza):
     """Доставляет пиццу"""
 
 
 @log('🏠 Забрали за {} с!')
-def pickup(pizza: Pizza):
+def pickup(pizza: our_pizza):
     """Доставляет пиццу"""
 
 
 if __name__ == '__main__':
-    first_pizza = Pizza('Pepperoni', 'XL')
-    second_pizza = Pizza('Margherita', 'L')
+    first_pizza = our_pizza('Pepperoni', 'XL')
+    second_pizza = our_pizza('Margherita', 'L')
     print(first_pizza)
     print(first_pizza.dict())
 
